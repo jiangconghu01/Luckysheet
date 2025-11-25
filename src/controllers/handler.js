@@ -4377,6 +4377,7 @@ export default function luckysheetHandler() {
 
         event.stopPropagation();
     }).click(function () {
+        
         clearTimeout(Store.luckysheet_cell_selected_extend_time);
         event.stopPropagation();
     }).dblclick(function () {

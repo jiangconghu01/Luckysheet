@@ -68,6 +68,7 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
     let end_r, start_r;
     let bodrder05 = 0.5;//Default 0.5
     let preEndR;
+   
     for (let r = dataset_row_st; r <= dataset_row_ed; r++) {
         if (r == 0) {
             start_r = -scrollHeight - 1;
@@ -103,7 +104,6 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
                 (end_r - start_r + 1+lastOffset-firstOffset) 
             )
             luckysheetTableContent.fillStyle = "#000000";
-
             //行标题栏序列号
             luckysheetTableContent.save();//save scale before draw text
             luckysheetTableContent.scale(Store.zoomRatio,Store.zoomRatio);
@@ -116,7 +116,6 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
             luckysheetTableContent.fillText(r + 1, horizonAlignPos/Store.zoomRatio, verticalAlignPos/Store.zoomRatio);
             luckysheetTableContent.restore();//restore scale after draw text
         }
-
         //vertical
         luckysheetTableContent.beginPath();
         luckysheetTableContent.moveTo(
@@ -555,6 +554,8 @@ function luckysheetDrawMain(scrollWidth, scrollHeight, drawWidth, drawHeight, of
 
     //表格canvas 初始化处理
     luckysheetTableContent.fillStyle = "#ffffff";
+    // luckysheetTableContent.globalAlpha=0.5;
+    luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     luckysheetTableContent.fillRect(
         (offsetLeft - 1) , 
         (offsetTop - 1) , 
@@ -564,6 +565,7 @@ function luckysheetDrawMain(scrollWidth, scrollHeight, drawWidth, drawHeight, of
     luckysheetTableContent.font = luckysheetdefaultFont();
     // luckysheetTableContent.textBaseline = "top";
     luckysheetTableContent.fillStyle = luckysheetdefaultstyle.fillStyle;
+    // luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
 
     //表格渲染区域 非空单元格行列 起止坐标
     let cellupdate = [];
@@ -1149,12 +1151,13 @@ let nullCellRender = function(r, c, start_r, start_c, end_r, end_c,luckysheetTab
     }
 
     if(fillStyle==null){
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        // luckysheetTableContent.fillStyle = "#FFFFFF";
+        luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     }
     else{
         luckysheetTableContent.fillStyle = fillStyle;
     }
-
+    
     // 这里计算canvas需要绘制的矩形范围时,需要留下原本单元格边框的位置
     // 让 fillRect 绘制矩形的起始xy坐标增加1,绘制长宽减少1
 
@@ -1305,7 +1308,8 @@ let cellRender = function(r, c, start_r, start_c, end_r, end_c, value, luckyshee
     }
     // luckysheetTableContent.textBaseline = 'top';
     if(fillStyle==null){
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        // luckysheetTableContent.fillStyle = "#FFFFFF";
+        luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     }
     else{
         luckysheetTableContent.fillStyle = fillStyle;
