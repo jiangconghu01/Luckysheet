@@ -124,10 +124,10 @@ const imageCtrl = {
         let src = typeof imageUrlHandle === 'function' ? imageUrlHandle(imgItem.src) : imgItem.src;
         let imgItemParam = _this.getImgItemParam(imgItem);
 
-        let width = imgItemParam.width * Store.zoomRatio;
-        let height = imgItemParam.height * Store.zoomRatio;
-        let left = imgItemParam.left * Store.zoomRatio;
-        let top = imgItemParam.top * Store.zoomRatio;
+        let width = imgItemParam.width;
+        let height = imgItemParam.height;
+        let left = imgItemParam.left;
+        let top = imgItemParam.top;
         let position = imgItemParam.position;
 
         let borderWidth = imgItem.border.width;
@@ -381,10 +381,10 @@ const imageCtrl = {
             let item = _this.images[id];
             let imgItemParam = _this.getImgItemParam(item);
 
-            let width = imgItemParam.width * Store.zoomRatio;
-            let height = imgItemParam.height * Store.zoomRatio;
-            let left = imgItemParam.left * Store.zoomRatio;
-            let top = imgItemParam.top * Store.zoomRatio;
+            let width = imgItemParam.width;
+            let height = imgItemParam.height;
+            let left = imgItemParam.left;
+            let top = imgItemParam.top;
             let position = imgItemParam.position;
         
             $("#luckysheet-modal-dialog-activeImage").show().css({
@@ -582,16 +582,16 @@ const imageCtrl = {
     getImgItemParam(imgItem){
         let isFixedPos = imgItem.isFixedPos;
 
-        let width = imgItem.default.width,
-            height = imgItem.default.height,
-            left = imgItem.default.left,
-            top = imgItem.default.top;
+        let width = imgItem.default.width * Store.zoomRatio,
+            height = imgItem.default.height * Store.zoomRatio,
+            left = imgItem.default.left * Store.zoomRatio,
+            top = imgItem.default.top * Store.zoomRatio;
 
         if(imgItem.crop.width != width || imgItem.crop.height != height){
-            width = imgItem.crop.width;
-            height = imgItem.crop.height;
-            left += imgItem.crop.offsetLeft;
-            top += imgItem.crop.offsetTop;
+            width = imgItem.crop.width * Store.zoomRatio;
+            height = imgItem.crop.height * Store.zoomRatio;
+            left += imgItem.crop.offsetLeft * Store.zoomRatio;
+            top += imgItem.crop.offsetTop * Store.zoomRatio;
         }
 
         let position = 'absolute';
@@ -599,6 +599,14 @@ const imageCtrl = {
             position = 'fixed';
             left = imgItem.fixedLeft + imgItem.crop.offsetLeft;
             top = imgItem.fixedTop + imgItem.crop.offsetTop;
+
+            // only need to scale the distance relative to the main area, otherwise it will continue to shift and overflow the main area.
+            // Note: After scaling here, there is no need to scale again when using this position externally
+            // fix #174
+            const operateAreaWidth = Store.rowHeaderWidth;
+            const operateAreaHeight = Store.infobarHeight + Store.toolbarHeight + Store.calculatebarHeight + Store.columnHeaderHeight;
+            left = (left - operateAreaWidth) * Store.zoomRatio + operateAreaWidth
+            top = (top - operateAreaHeight) * Store.zoomRatio + operateAreaHeight
         }
 
         return {
@@ -619,10 +627,10 @@ const imageCtrl = {
         let imgItem = _this.images[_this.currentImgId];
         let imgItemParam = _this.getImgItemParam(imgItem);
 
-        let width = imgItemParam.width * Store.zoomRatio;
-        let height = imgItemParam.height * Store.zoomRatio;
-        let left = imgItemParam.left * Store.zoomRatio;
-        let top = imgItemParam.top * Store.zoomRatio;
+        let width = imgItemParam.width;
+        let height = imgItemParam.height;
+        let left = imgItemParam.left;
+        let top = imgItemParam.top;
         let position = imgItemParam.position;
 
         $("#" + _this.currentImgId).show().css({
@@ -705,13 +713,16 @@ const imageCtrl = {
         let obj = $("#luckysheet-modal-dialog-activeImage")[0];
         let item = _this.images[_this.currentImgId];
 
+		var zoomRatio = Store.zoomRatio;
+		
         if(item.isFixedPos){
-            item.fixedLeft = obj.offsetLeft - item.crop.offsetLeft;
-            item.fixedTop = obj.offsetTop - item.crop.offsetTop;
+			
+            item.fixedLeft = (obj.offsetLeft - item.crop.offsetLeft) / zoomRatio;
+            item.fixedTop = (obj.offsetTop - item.crop.offsetTop) / zoomRatio;
         }
         else{
-            item.default.left = obj.offsetLeft - item.crop.offsetLeft;
-            item.default.top = obj.offsetTop - item.crop.offsetTop;
+            item.default.left = (obj.offsetLeft - item.crop.offsetLeft) / zoomRatio;
+            item.default.top = (obj.offsetTop - item.crop.offsetTop) / zoomRatio;
         }
 
         _this.ref();
@@ -720,6 +731,8 @@ const imageCtrl = {
         let _this = this;
 
         _this.resize = null;
+		
+		var zoomRatio = Store.zoomRatio;
 
         let obj = $("#luckysheet-modal-dialog-activeImage")[0];
 
@@ -727,21 +740,21 @@ const imageCtrl = {
         let scaleX = obj.clientWidth / item.crop.width;
         let scaleY = obj.clientHeight / item.crop.height;
 
-        item.default.width = Math.round(item.default.width * scaleX);
-        item.default.height = Math.round(item.default.height * scaleY);
+        item.default.width = Math.round(item.default.width * scaleX / zoomRatio);
+        item.default.height = Math.round(item.default.height * scaleY / zoomRatio);
 
-        item.crop.width = Math.round(item.crop.width * scaleX);
-        item.crop.height = Math.round(item.crop.height * scaleY);
-        item.crop.offsetLeft = Math.round(item.crop.offsetLeft * scaleX);
-        item.crop.offsetTop = Math.round(item.crop.offsetTop * scaleY);
+        item.crop.width = Math.round(item.crop.width * scaleX / zoomRatio);
+        item.crop.height = Math.round(item.crop.height * scaleY / zoomRatio);
+        item.crop.offsetLeft = Math.round(item.crop.offsetLeft * scaleX / zoomRatio);
+        item.crop.offsetTop = Math.round(item.crop.offsetTop * scaleY / zoomRatio);
 
         if(item.isFixedPos){
-            item.fixedLeft = obj.offsetLeft;
-            item.fixedTop = obj.offsetTop;
+            item.fixedLeft = obj.offsetLeft / zoomRatio;
+            item.fixedTop = obj.offsetTop / zoomRatio;
         }
         else{
-            item.default.left = obj.offsetLeft - item.crop.offsetLeft;
-            item.default.top = obj.offsetTop - item.crop.offsetTop;
+            item.default.left = (obj.offsetLeft - item.crop.offsetLeft) / zoomRatio;
+            item.default.top = (obj.offsetTop - item.crop.offsetTop) / zoomRatio;
         }
 
         _this.ref();

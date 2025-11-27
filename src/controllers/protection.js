@@ -41,13 +41,13 @@ function addRangeItem(item){
     
     let passwordTxt = "";
     if(password!=null && password.length>0){
-        passwordTxt = '<i class="icon iconfont luckysheet-iconfont-bianji2" title="'+ local_protection.rangeItemHasPassword+'"></i>';
+        passwordTxt = '<i class="icon iconfont-luckysheet luckysheet-iconfont-bianji2" title="'+ local_protection.rangeItemHasPassword+'"></i>';
     }
 
     let rangeItemTemplate = `
         <div class="luckysheet-protection-rangeItem" title="${local_protection.rangeItemDblclick}">
             <div class="luckysheet-protection-rangeItem-del" title="${locale_button.delete}">
-                <i class="icon iconfont luckysheet-iconfont-shanchu"></i>
+                <i class="icon iconfont-luckysheet luckysheet-iconfont-shanchu"></i>
             </div>
             <div class="luckysheet-protection-rangeItem-name" title="${title}">
                 ${title}${passwordTxt}
@@ -56,7 +56,7 @@ function addRangeItem(item){
                 ${sqref}
             </div>
             <div class="luckysheet-protection-rangeItem-update" title="${locale_button.update}">
-                <i class="icon iconfont luckysheet-iconfont-bianji"></i>
+                <i class="icon iconfont-luckysheet luckysheet-iconfont-bianji"></i>
             </div>
         </div>
     `;
@@ -64,14 +64,14 @@ function addRangeItem(item){
     $("#luckysheet-protection-rangeItem-container").append(rangeItemTemplate);
 }
 
-function initialEvent(file){
+export function initialEvent(file){
 
     const _locale = locale();
     const local_protection = _locale.protection;
     const locale_button = _locale.button;
 
     //confirm protection
-    $("#luckysheet-slider-protection-ok").click(function(){
+    $("#luckysheet-slider-protection-ok").unbind("click").click(function () {
         let password = $("#protection-password").val();
         let sheet = $("#protection-swichProtectionState").is(":checked");
         let hint = $("#protection-hint").val();
@@ -115,7 +115,8 @@ function initialEvent(file){
             authorityData[name] = authorityValue==true?1:0;
         }
 
-        authorityData.allowRangeList = rangeItemListCache;
+        let allowRangeListTemp = JSON.parse(JSON.stringify(rangeItemListCache));
+        authorityData.allowRangeList = allowRangeListTemp;
 
         rangeItemListCache = [];
         firstInputSheetProtectionPassword = true;
@@ -258,7 +259,7 @@ function initialEvent(file){
 
             let passwordTxt = "";
             if(password!=null && password.length>0){
-                passwordTxt = '<i class="icon iconfont luckysheet-iconfont-bianji2" title="'+ local_protection.rangeItemHasPassword+'"></i>';
+                passwordTxt = '<i class="icon iconfont-luckysheet luckysheet-iconfont-bianji2" title="'+ local_protection.rangeItemHasPassword+'"></i>';
             }
 
             $name.html(name+passwordTxt).attr("title",name);
@@ -704,16 +705,37 @@ export function openProtectionModal(file){
             restoreProtectionConfig(aut);
         }
     }
-    else{//protection initial config
-        $("#luckysheet-protection-check-selectLockedCells").prop('checked',true);
-        $("#luckysheet-protection-check-selectunLockedCells").prop('checked',true);
+    else{//protection initial config //没有设置可编辑区域
+        //默认全选
+        $("#protection-swichProtectionState").prop('checked', true);//保护工作表及其单元格
+        $("#luckysheet-protection-check-selectLockedCells").prop('checked', true);
+        $("#luckysheet-protection-check-selectunLockedCells").prop('checked', true);
+        $("#luckysheet-protection-check-formatCells").prop('checked', true);
+        $("#luckysheet-protection-check-formatColumns").prop('checked', true);
+        $("#luckysheet-protection-check-formatRows").prop('checked', true);
+        $("#luckysheet-protection-check-insertColumns").prop('checked', true);
+        $("#luckysheet-protection-check-insertRows").prop('checked', true);
+        $("#luckysheet-protection-check-deleteColumns").prop('checked', true);
+        $("#luckysheet-protection-check-insertHyperlinks").prop('checked', true);
+        $("#luckysheet-protection-check-deleteRows").prop('checked', true);
+        $("#luckysheet-protection-check-sort").prop('checked', true);
+        $("#luckysheet-protection-check-filter").prop('checked', true);
+        $("#luckysheet-protection-check-usePivotTablereports").prop('checked', true);
+        $("#luckysheet-protection-check-editObjects").prop('checked', true);
+        $("#luckysheet-protection-check-editScenarios").prop('checked', true);
+        //设置允许用户编辑区域的区域的数据为空，并将缓存区置空。
+        clearProtectionModalEditContent();
     }
 
     $("#luckysheet-modal-dialog-slider-protection").show();
     luckysheetsizeauto();
 
 }
-
+export function clearProtectionModalEditContent() {
+    //清除用户可编辑区域的内容
+    rangeItemListCache = [];
+    $("#luckysheet-protection-rangeItem-container").empty();
+}
 export function closeProtectionModal(){
     $("#luckysheet-protection-rangeItem-dialog").hide();
     $("#luckysheet-modal-dialog-slider-protection").hide();

@@ -516,7 +516,7 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 	}
 
 	```
-	`ture`:展示默认的字符串
+	`true`:展示默认的字符串
 	```js
 	options:{
 		// 其他配置
@@ -528,8 +528,10 @@ Luckysheet开放了更细致的自定义配置选项，分别有
 	```js
 	options:{
 		// 其他配置
-		userImage:'https://cdn.jsdelivr.net/npm/luckyresources@1.0.3/assets/img/logo/logo.png', // 头像url
-		userName:'Lucky', // 用户名
+		userInfo: {
+			userImage:'https://cdn.jsdelivr.net/npm/luckyresources@1.0.3/assets/img/logo/logo.png', // 头像url
+			userName:'Lucky' // 用户名
+		}
 	}
 	```
 

@@ -25,6 +25,14 @@ Funds donated via Patreon go directly to support mengshukeji's work on Luckyshee
 ## Sponsors List
 
 (Sort by time)
+- *涛 ¥ 200
+- popo ¥ 1
+- 孔垂善 ¥ 5
+- Shawn文 ¥ 99
+- 幸运的小路易 ¥ 1
+- 冯启俊 ¥ 88
+- mxb ¥ 10
+- 祭阳 ¥ 20
 - *勇 ¥ 30
 - 虚我 ¥ 200
 - 甜党 ¥ 50
@@ -126,3 +134,23 @@ Funds donated via Patreon go directly to support mengshukeji's work on Luckyshee
 - 快意江湖 ¥ 50
 - *新 ¥ 9.9
 - **龙 ¥ 100
+- **江 ¥ 100
+- **威 ¥ 9.8
+- **涛 ¥ 500
+- **嘉 ¥ 10
+- *涛 ¥ 1
+- *兵 ¥ 5
+- *阳 ¥ 200
+- *辉 ¥ 1
+- *帆 ¥ 30
+- **旺 ¥ 10
+- **麟 ¥ 20
+- *霖 ¥ 9.9
+- *帅 ¥ 10
+- *鑫 ¥ 6.66
+- ~朴:shu ¥ 29.79
+- 未来 ¥ 1
+- 国勇 ¥ 0.1
+- 用心灵听雨 ¥ 10
+- 钊 ¥ 5
+- 星稀 ¥ 5

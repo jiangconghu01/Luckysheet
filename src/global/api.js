@@ -41,6 +41,8 @@ import imageCtrl from '../controllers/imageCtrl';
 import dayjs from "dayjs";
 import {getRangetxt } from '../methods/get';
 import {luckysheetupdateCell} from '../controllers/updateCell';
+import luckysheetSearchReplace from "../controllers/searchReplace";
+
 const IDCardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
 
 /**
@@ -106,15 +108,11 @@ export function getCellValue(row, column, options = {}) {
  * @param {Object} options 可选参数
  * @param {Number} options.order 工作表索引；默认值为当前工作表索引
  * @param {Boolean} options.isRefresh 是否刷新界面；默认为`true`
+ * @param {Boolean} options.triggerBeforeUpdate 是否触发更新前hook；默认为`true`
+ * @param {Boolean} options.triggerUpdated 是否触发更新后hook；默认为`true`
  * @param {Function} options.success 操作结束的回调函数
  */
 export function setCellValue(row, column, value, options = {}) {
-
-    let curv = Store.flowdata[row][column];
-
-    // Store old value for hook function
-    const oldValue = JSON.stringify(curv);
-
     if (!isRealNum(row) || !isRealNum(column)) {
         return tooltip.info('The row or column parameter is invalid.', '');
     }
@@ -122,6 +120,8 @@ export function setCellValue(row, column, value, options = {}) {
     let {
         order = getSheetIndex(Store.currentSheetIndex),
         isRefresh = true,
+        triggerBeforeUpdate = true,
+        triggerUpdated = true,
         success
     } = {...options}
 
@@ -132,7 +132,7 @@ export function setCellValue(row, column, value, options = {}) {
     }
 
     /* cell更新前触发  */
-    if (!method.createHookFunction("cellUpdateBefore", row, column, value, isRefresh)) {
+    if (triggerBeforeUpdate && !method.createHookFunction("cellUpdateBefore", row, column, value, isRefresh)) {
         /* 如果cellUpdateBefore函数返回false 则不执行后续的更新 */
         return;
     }
@@ -143,6 +143,11 @@ export function setCellValue(row, column, value, options = {}) {
     }
     if(data.length == 0){
         data = sheetmanage.buildGridData(file);
+    }
+
+    let oldValue
+    if (Store.flowdata[row] && Store.flowdata[row][column]) {
+      oldValue = JSON.stringify(Store.flowdata[row][column]);
     }
 
     // luckysheetformula.updatecell(row, column, value);
@@ -174,6 +179,9 @@ export function setCellValue(row, column, value, options = {}) {
     }
     else if(value instanceof Object){
         let curv = {};
+        if(isRealNull(data[row])){
+            data[row] = {};
+        }
         if(isRealNull(data[row][column])){
             data[row][column] = {};
         }
@@ -191,6 +199,8 @@ export function setCellValue(row, column, value, options = {}) {
             }
             if(value.f!=null){
                 curv.f = value.f;
+            } else {
+                formula.delFunctionGroup(row, column);
             }
             if(value.v!=null){
                 curv.v = value.v;
@@ -201,7 +211,6 @@ export function setCellValue(row, column, value, options = {}) {
             if(value.m!=null){
                 curv.m = value.m;
             }
-            formula.delFunctionGroup(row, column);
             setcellvalue(row, column, data, curv);//update text value
         }
         for(let attr in value){
@@ -227,8 +236,15 @@ export function setCellValue(row, column, value, options = {}) {
 
     /* cell更新后触发  */
     setTimeout(() => {
+        let oldValueObj
+        if (oldValue) {
+          oldValueObj = JSON.parse(oldValue)
+        }
         // Hook function
-        method.createHookFunction("cellUpdated", row, column, JSON.parse(oldValue), Store.flowdata[row][column], isRefresh);
+        if (triggerUpdated) {
+            method.createHookFunction("cellUpdated", row, column, oldValueObj, Store.flowdata[row][column], isRefresh);
+        }
+
     }, 0);
 
     if(file.index == Store.currentSheetIndex && isRefresh){
@@ -1107,7 +1123,7 @@ export function insertRowOrColumn(type, index = 0, options = {}) {
 
     // 默认在行上方增加行，列左侧增加列
     let sheetIndex;
-    if(order){
+    if (!isNaN(order)){
         if(Store.luckysheetfile[order]){
             sheetIndex = Store.luckysheetfile[order].index;
         }
@@ -3657,7 +3673,9 @@ export function setRangeConditionalFormatDefault(conditionName, conditionValue, 
         'last10',
         'last10%',
         'AboveAverage',
-        'SubAverage'
+        'SubAverage',
+        'regExp',
+        'sort',
     ];
 
     if(!conditionName || !conditionNameValues.includes(conditionName)){
@@ -3867,6 +3885,12 @@ export function setRangeConditionalFormatDefault(conditionName, conditionValue, 
     }
     else if(conditionName == 'AboveAverage' || conditionName == 'SubAverage'){
         conditionValue2.push(conditionName);
+    }
+    else if(conditionName == 'regExp') {
+        conditionValue2.push(...conditionValue);
+    }
+    else if(conditionName == 'sort') {
+        conditionValue2.push(...conditionValue);
     }
 
     if(!format.hasOwnProperty("textColor") || !format.hasOwnProperty("cellColor")){
@@ -5484,7 +5508,7 @@ export function setSheetZoom(zoom, options = {}) {
         imageCtrl.images = currentSheet.images;
         imageCtrl.allImagesShow();
         imageCtrl.init();
-        
+
         zoomNumberDomBind();
         zoomRefreshView();
     }
@@ -5891,12 +5915,50 @@ export function getAllSheets() {
 
         delete item.load;
         delete item.freezen;
-
     })
 
     return data;
 }
 
+export function getAllChartsBase64(cb) {
+    let data = $.extend(true, [], Store.luckysheetfile);
+    const chartMap = {}
+
+    data.forEach((item, index, arr) => {
+        if(item.hasOwnProperty('chart') && item.chart.length > 0){
+            chartMap[item.index] = {}
+            item.chart.forEach((chartInfo) => {
+                const chartDom = document.querySelector(`#${chartInfo.chart_id}`);
+                const chartInstance = echarts.getInstanceByDom(chartDom);
+                chartInstance.resize({width:chartInfo.width,height: chartInfo.height,animation: {
+                    duration: 0
+                }})
+
+                chartMap[item.index][chartInfo.chart_id] = chartInstance
+                
+            });
+
+        }
+    })
+
+    setTimeout(() => {
+        for (const index in chartMap) {
+            if (Object.hasOwnProperty.call(chartMap, index)) {
+                const sheet = chartMap[index];
+                for (const chart_id in sheet) {
+                    if (Object.hasOwnProperty.call(sheet, chart_id)) {
+                        const chartInstance = sheet[chart_id];
+                        sheet[chart_id] = chartInstance.getDataURL();
+                    }
+                }
+                
+            }
+        }
+        cb && cb(chartMap)
+        
+    }, 500);
+    
+}
 
 /**
  * 根据index获取sheet页配置
@@ -6876,4 +6938,14 @@ export function checkTheStatusOfTheSelectedCells(type,status){
     })
 
     return flag;
+}
+
+/**
+ * 调用查找/替换 dialog
+ * @param {Number} source              0:搜索 1:替换
+ */
+export function openSearchDialog(source = 1){
+    luckysheetSearchReplace.createDialog(source);
+    luckysheetSearchReplace.init();
+    $("#luckysheet-search-replace #searchInput input").focus();
 }

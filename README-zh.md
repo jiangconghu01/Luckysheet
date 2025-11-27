@@ -4,25 +4,28 @@
 
 </div>
 
-# Luckysheet 3.x 已更名为 [Univer](https://github.com/dream-num/univer)
-
 简体中文 | [English](./README.md)
+
+# Luckysheet 已不再维护，推荐使用升级版 [Univer](https://univer.short.gy/LuckysheetRepository) 用于生产环境部署，新版解决了大数据量加载，图表样式，透视表，公式计算等方面的问题，做了很多优化设计，增加了导入，导出，打印，协同等功能，提高了表格性能，更有专业技术团队进行技术支持。
+
+点击 [#1454](https://github.com/dream-num/Luckysheet/issues/1454) 查看更多详情。
+
 
 ## 介绍
 🚀Luckysheet ，一款纯前端类似excel的在线表格，功能强大、配置简单、完全开源。
 
 
 ## 相关链接
- | 源码   | 文档 | Demo | 插件Demo | 论坛 |
- | ------ | -------- | ------ | ------ | ------ |
- | [Github](https://github.com/mengshukeji/Luckysheet)| [在线文档](https://dream-num.github.io/LuckysheetDocs/zh/) | [在线Demo](https://dream-num.github.io/LuckysheetDemo) / [协同编辑Demo](http://luckysheet.lashuju.com/demo/) | [导入Excel Demo](https://dream-num.github.io/LuckyexcelDemo/) | [中文论坛](https://support.qq.com/product/288322) |
- | [Gitee镜像](https://gitee.com/mengshukeji/Luckysheet)| [Gitee在线文档](https://mengshukeji.gitee.io/LuckysheetDocs/zh/) | [Gitee在线Demo](https://mengshukeji.gitee.io/luckysheetdemo/) | [Gitee导入Excel Demo](https://mengshukeji.gitee.io/luckyexceldemo/) | [Google Group](https://groups.google.com/g/luckysheet) |
+ | 源码   | 文档 | Demo | 论坛 |
+ | ------ | -------- | ------ | ------ |
+ | [Github](https://github.com/mengshukeji/Luckysheet)| [在线文档](https://dream-num.github.io/LuckysheetDocs/zh/) | [在线Demo](https://dream-num.github.io/LuckysheetDemo) / [协同编辑Demo](http://luckysheet.lashuju.com/demo/) | [中文论坛](https://support.qq.com/product/288322) |
+ | [Gitee镜像](https://gitee.com/mengshukeji/Luckysheet)| [Gitee在线文档](https://mengshukeji.gitee.io/LuckysheetDocs/zh/) | [Gitee在线Demo](https://mengshukeji.gitee.io/luckysheetdemo/) | [Google Group](https://groups.google.com/g/luckysheet) |
 
 ![演示](/docs/.vuepress/public/img/LuckysheetDemo.gif)
 
 ## 插件
-- [Luckyexcel](https://gitee.com/mengshukeji/Luckyexcel)：excel导入导出库 
-- [chartMix](https://gitee.com/mengshukeji/chartMix)：图表插件
+
+导入导出、打印等高级功能请使用 [Univer](https://github.com/dream-num/univer/)
 
 ## 生态
 
@@ -127,19 +130,17 @@ npm run build
 
 ## 合作项目
 
-- [鲁班h5](https://github.com/ly525/luban-h5)
 - [h5-Dooring](https://github.com/MrXujiang/h5-Dooring)
-- [Furion](https://gitee.com/monksoul/Furion)
-- [AFFiNE.PRO](https://github.com/toeverything/AFFiNE)
 
 ## 交流
 
+- [官网](http://lucky.lashuju.com/index.html)
 - [Github 论坛](https://github.com/mengshukeji/Luckysheet/discussions)
 - 以下扫码加入官方微信群或者QQ群
 
-|  加小编微信:dushusir2，备注:加群  | QQ群:767964895 |
-|---|---|
-|<img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/dushusir_wechat.jpg" width="200" />| <img src="https://cdn.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/luckysheet_qq_group_2.jpeg" width="200" /> |
+加小编微信: msuniver，备注:加群
+
+<img src="https://gcore.jsdelivr.net/gh/mengshukeji/LuckyResources@master/assets/img/wechat/univer-wechat.jpg" width="200" />
 
 
 [英文社群](./README.md)
@@ -163,6 +164,14 @@ Luckysheet是MIT许可的开源项目，其持续稳定的开发离不开这些�
 ## 赞助者列表
 
 （按时间顺序排列）
+- *涛 ¥ 200
+- popo ¥ 1
+- 孔垂善 ¥ 5
+- Shawn文 ¥ 99
+- 幸运的小路易 ¥ 1
+- 冯启俊 ¥ 88
+- mxb ¥ 10
+- 祭阳 ¥ 20
 - *勇 ¥ 30
 - 虚我 ¥ 200
 - 甜党 ¥ 50
@@ -264,6 +273,26 @@ Luckysheet是MIT许可的开源项目，其持续稳定的开发离不开这些�
 - 快意江湖 ¥ 50
 - *新 ¥ 9.9
 - **龙 ¥ 100
+- **江 ¥ 100
+- **威 ¥ 9.8
+- **涛 ¥ 500
+- **嘉 ¥ 10
+- *涛 ¥ 1
+- *兵 ¥ 5
+- *阳 ¥ 200
+- *辉 ¥ 1
+- *帆 ¥ 30
+- **旺 ¥ 10
+- **麟 ¥ 20
+- *霖 ¥ 9.9
+- *帅 ¥ 10
+- *鑫 ¥ 6.66
+- ~朴:shu ¥ 29.79
+- 未来 ¥ 1
+- 国勇 ¥ 0.1
+- 用心灵听雨 ¥ 10
+- 钊 ¥ 5
+- 星稀 ¥ 5
 
 ## 贡献者和感谢
 

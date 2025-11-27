@@ -9,25 +9,27 @@
 
 </div>
 
-# Luckysheet 3.x has been renamed to [Univer](https://github.com/dream-num/univer)
-
 English| [简体中文](./README-zh.md)
+
+# Luckysheet is no longer maintained. It is recommended to use the upgraded version of [Univer](https://univer.short.gy/LuckysheetRepository) for production environment deployment. The new version solves problems such as large data loading, chart styles, pivot tables, formula calculations, etc., and has made many optimization designs, added import, export, printing, collaboration and other functions, improved table performance, and has a professional technical team to provide technical support.
+
+Follow the [#1454](https://github.com/dream-num/Luckysheet/issues/1454) issue for more details.
 
 ## Introduction
 🚀Luckysheet is an online spreadsheet like excel that is powerful, simple to configure, and completely open source.
 
 
 ## Links
- | Source Code   | Documentation | Demo | Plugins Demo | Forum |
- | ------ | -------- | ------ | ------ | ------ |
- | [Github](https://github.com/mengshukeji/Luckysheet)| [Online Documentation](https://dream-num.github.io/LuckysheetDocs/) | [Online Demo](https://dream-num.github.io/LuckysheetDemo) / [Cooperative editing demo](http://luckysheet.lashuju.com/demo/) | [Import Excel Demo](https://dream-num.github.io/LuckyexcelDemo/) | [Chinese Forum](https://support.qq.com/product/288322)  |
- | [Gitee Mirror](https://gitee.com/mengshukeji/Luckysheet)| [Gitee Online Documentation](https://mengshukeji.gitee.io/LuckysheetDocs/) | [Gitee Online Demo](https://mengshukeji.gitee.io/luckysheetdemo/) | [Gitee Import Excel Demo](https://mengshukeji.gitee.io/luckyexceldemo/) | [Google Group](https://groups.google.com/g/luckysheet) |
+ | Source Code   | Documentation | Demo | Forum |
+ | ------ | -------- | ------ | ------ |
+ | [Github](https://github.com/mengshukeji/Luckysheet)| [Online Documentation](https://dream-num.github.io/LuckysheetDocs/) | [Online Demo](https://dream-num.github.io/LuckysheetDemo) / [Cooperative editing demo](http://luckysheet.lashuju.com/demo/) | [Chinese Forum](https://support.qq.com/product/288322)  |
+ | [Gitee Mirror](https://gitee.com/mengshukeji/Luckysheet)| [Gitee Online Documentation](https://mengshukeji.gitee.io/LuckysheetDocs/) | [Gitee Online Demo](https://mengshukeji.gitee.io/luckysheetdemo/) | [Google Group](https://groups.google.com/g/luckysheet) |
 
 ![Demo](/docs/.vuepress/public/img/LuckysheetDemo.gif)
 
 ## Plugins
-- [Luckyexcel](https://github.com/mengshukeji/Luckyexcel): Excel import and export library
-- [chartMix](https://github.com/mengshukeji/chartMix): Chart plugin
+
+For advanced features like import, export, and printing, please use [Univer](https://github.com/dream-num/univer/)
 
 ## Ecosystem
 
@@ -132,12 +134,11 @@ npm run build
 
 ## Partner project
 
-- [luban-h5](https://github.com/ly525/luban-h5)
 - [h5-Dooring](https://github.com/MrXujiang/h5-Dooring)
-- [Furion](https://gitee.com/monksoul/Furion)
-- [AFFiNE.PRO](https://github.com/toeverything/AFFiNE)
 
 ## Communication
+
+- [WebSite](http://lucky.lashuju.com/index.html)
 - [Github Discussions](https://github.com/mengshukeji/Luckysheet/discussions)
 - [Gitter](https://gitter.im/mengshukeji/Luckysheet)
 
@@ -162,6 +163,14 @@ Funds donated via Patreon go directly to support mengshukeji's work on Luckyshee
 ## Sponsors List
 
 (Sort by time)
+- *涛 ¥ 200
+- popo ¥ 1
+- 孔垂善 ¥ 5
+- Shawn文 ¥ 99
+- 幸运的小路易 ¥ 1
+- 冯启俊 ¥ 88
+- mxb ¥ 10
+- 祭阳 ¥ 20
 - *勇 ¥ 30
 - 虚我 ¥ 200
 - 甜党 ¥ 50
@@ -263,6 +272,26 @@ Funds donated via Patreon go directly to support mengshukeji's work on Luckyshee
 - 快意江湖 ¥ 50
 - *新 ¥ 9.9
 - **龙 ¥ 100
+- **江 ¥ 100
+- **威 ¥ 9.8
+- **涛 ¥ 500
+- **嘉 ¥ 10
+- *涛 ¥ 1
+- *兵 ¥ 5
+- *阳 ¥ 200
+- *辉 ¥ 1
+- *帆 ¥ 30
+- **旺 ¥ 10
+- **麟 ¥ 20
+- *霖 ¥ 9.9
+- *帅 ¥ 10
+- *鑫 ¥ 6.66
+- ~朴:shu ¥ 29.79
+- 未来 ¥ 1
+- 国勇 ¥ 0.1
+- 用心灵听雨 ¥ 10
+- 钊 ¥ 5
+- 星稀 ¥ 5
 
 ## Authors and acknowledgment
 

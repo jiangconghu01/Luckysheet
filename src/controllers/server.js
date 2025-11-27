@@ -355,13 +355,7 @@ const server = {
 	        //通信发生错误时触发
 	        _this.websocket.onerror = function(){
 	            _this.wxErrorCount++;
-                clearInterval(_this.retryTimer)
-                _this.retryTimer = null
-                /* 链接发生错误时候触发  */
-                if (!method.createHookFunction("websocketError",  _this.websocket)) {
-                    /* 如果websocketError函数返回false 则不执行后续的更新 */
-                    return;
-                }
+
 	            if(_this.wxErrorCount > 3){
 	                showloading(locale().websocket.refresh);
 	            }
@@ -369,17 +363,10 @@ const server = {
 	                showloading(locale().websocket.wait);
 	                _this.openWebSocket();
 	            }
-                return null
-
 	        }
 
 	        //连接关闭时触发
 	        _this.websocket.onclose = function(e){
-                /* 链接关闭误时候触发  */
-                if (!method.createHookFunction("websocketClose",  _this.websocket)) {
-                    /* 如果websocketError函数返回false 则不执行后续的更新 */
-                    return;
-                }
 				console.info(locale().websocket.close);
 				if(e.code === 1000){
 					clearInterval(_this.retryTimer)
@@ -553,7 +540,10 @@ const server = {
 	                    luckysheetFreezen.createFreezenVertical(file["freezen"].vertical.freezenverticaldata, file["freezen"].vertical.left);
 	                }
 
-	                luckysheetFreezen.createAssistCanvas();
+                  luckysheetFreezen.createAssistCanvas();
+                  setTimeout(function () {
+                    luckysheetrefreshgrid();
+                  }, 1);
 	            }
 	        }
 	        else if(k == "filter_select"){ //筛选范围

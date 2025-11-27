@@ -56,7 +56,7 @@ const luckysheetFreezen = {
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
-                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont luckysheet-iconfont-dongjie1"
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont-luckysheet luckysheet-iconfont-dongjie1"
                         style="user-select: none;">
                         </div>
                     </div>
@@ -158,7 +158,7 @@ const luckysheetFreezen = {
 
         _this.freezenverticaldata = freezenverticaldata;
 
-        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont luckysheet-iconfont-dongjie1"></i> '+locale().freezen.freezenCancel);
+        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont-luckysheet luckysheet-iconfont-dongjie1"></i> '+locale().freezen.freezenCancel);
 
         // 解决freeze 不垂直居中的问题
         const freezeHTML = `
@@ -167,7 +167,7 @@ const luckysheetFreezen = {
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
-                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont luckysheet-iconfont-dongjie1"
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont-luckysheet luckysheet-iconfont-dongjie1"
                         style="user-select: none;">
                         </div>
                     </div>
@@ -332,7 +332,7 @@ const luckysheetFreezen = {
     cancelFreezenHorizontal: function (sheetIndex) {
         let _this = this;
 
-        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont luckysheet-iconfont-dongjie1"></i> '+locale().freezen.default);
+        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont-luckysheet luckysheet-iconfont-dongjie1"></i> '+locale().freezen.default);
 
         // 解决freeze 不垂直居中的问题
         const freezeHTML = `
@@ -341,7 +341,7 @@ const luckysheetFreezen = {
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
-                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont luckysheet-iconfont-dongjie1"
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont-luckysheet luckysheet-iconfont-dongjie1"
                         style="user-select: none;">
                         </div>
                     </div>
@@ -450,7 +450,7 @@ const luckysheetFreezen = {
 
         // $("#luckysheet-freezen-btn-horizontal").html('<i class="fa fa-list-alt"></i> '+locale().freezen.freezenCancel);
 
-        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont luckysheet-iconfont-dongjie1"></i> '+locale().freezen.freezenCancel);
+        // $("#luckysheet-freezen-btn-horizontal").html('<i class="luckysheet-icon-img-container iconfont-luckysheet luckysheet-iconfont-dongjie1"></i> '+locale().freezen.freezenCancel);
 
         const freezeHTML = `
             <div class="luckysheet-toolbar-button-outer-box luckysheet-inline-block"
@@ -458,7 +458,7 @@ const luckysheetFreezen = {
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
-                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont luckysheet-iconfont-dongjie1"
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-function iconfont-luckysheet luckysheet-iconfont-dongjie1"
                         style="user-select: none;">
                         </div>
                     </div>
@@ -548,6 +548,11 @@ const luckysheetFreezen = {
         //有冻结时 选区框 滚动适应
         if(Store.luckysheet_select_save != null && Store.luckysheet_select_save.length > 0){
             _this.scrollAdaptOfselect();    
+        }
+
+        //有冻结时 图片 滚动适应
+        if($(".luckysheet-modal-dialog-image").length > 0 && imageCtrl.images != undefined){
+            _this.scrollAdaptOfImage();
         }
 
         //有冻结时 图表框 滚动适应
@@ -1014,6 +1019,75 @@ const luckysheetFreezen = {
         else{
             selectHightlightShow();
         }
+    },
+    scrollAdaptOfImage: function () {
+
+        let _this = this;
+
+        var images = imageCtrl.images;
+
+        let scrollTop = $("#luckysheet-cell-main").scrollTop();
+        let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
+
+        let freezenTop =  _this.freezenhorizontaldata != null ? (_this.freezenhorizontaldata[0] - _this.freezenhorizontaldata[2]) : -1;
+        let freezenLeft = _this.freezenverticaldata != null ? (_this.freezenverticaldata[0] - _this.freezenverticaldata[2]) : -1;
+
+        let zoomRatio = Store.zoomRatio;
+
+        $.each(images, function (i) {
+
+            let image = images[i];
+            let dialogImage = $("#" + i);
+            let x = dialogImage.position();
+
+            let width = dialogImage.width();
+            let height = dialogImage.height();
+            let defaultTop = image.default.top * zoomRatio;
+            let defaultLeft = image.default.left * zoomRatio;
+
+            let isHidden = false;
+
+            //行冻结
+            if (defaultTop >= freezenTop) {//原图片在冻结区外
+                if (x.top < freezenTop) { //在界面上的位置已经进入冻结区里面了
+                    dialogImage.css("visibility", "hidden");
+                    isHidden = true;
+                }
+                else {
+                    dialogImage.css({
+                        "visibility": "visible"
+                    });
+                }
+            }
+            else {//原图片在冻结区内
+                dialogImage.css({
+                    "top": defaultTop + scrollTop,
+                    "height": height,
+                    "visibility": "visible"
+                });
+            }
+
+            //列冻结
+            if (!isHidden) {
+                if (defaultLeft >= freezenLeft) {//原图片在冻结区外
+                    if (x.left < freezenLeft) { //在界面上的位置已经进入冻结区里面了
+                        dialogImage.css("visibility", "hidden");
+                    }
+                    else {
+                        dialogImage.css({
+                            "visibility": "visible"
+                        });
+                    }
+                }
+                else {//原图片在冻结区内
+                    dialogImage.css({
+                        "left": defaultLeft + scrollLeft,
+                        "width": width,
+                        "visibility": "visible"
+                    });
+                }
+            }
+        });
     },
     scrollAdaptOfchart: function(){
         let _this = this;
