@@ -517,6 +517,7 @@ function luckysheetDrawMain(
 
     //表格canvas 初始化处理
     luckysheetTableContent.fillStyle = "#ffffff";
+    luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     luckysheetTableContent.fillRect(
         offsetLeft - 1,
         offsetTop - 1,
@@ -1259,7 +1260,8 @@ let nullCellRender = function(
     }
 
     if (fillStyle == null) {
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        // luckysheetTableContent.fillStyle = "#FFFFFF";
+         luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     } else {
         luckysheetTableContent.fillStyle = fillStyle;
     }
@@ -1444,7 +1446,8 @@ let cellRender = function(
     }
     // luckysheetTableContent.textBaseline = 'top';
     if (fillStyle == null) {
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        // luckysheetTableContent.fillStyle = "#FFFFFF";
+        luckysheetTableContent.fillStyle = "rgba(0,0,0,0)";
     } else {
         luckysheetTableContent.fillStyle = fillStyle;
     }
