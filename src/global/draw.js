@@ -123,7 +123,7 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
              (start_r + offsetTop - 2)
         );
         luckysheetTableContent.lineTo(
-            (Store.rowHeaderWidth - 2 + bodrder05) ,
+            (Store.rowHeaderWidth - 2 + bodrder05),
              (end_r + offsetTop - 2)
         );
         luckysheetTableContent.lineWidth = 1;
@@ -1324,7 +1324,7 @@ let cellRender = function(r, c, start_r, start_c, end_r, end_c, value, luckyshee
         (start_c + offsetLeft + borderfix[0] + 1), 
         (start_r + offsetTop  + borderfix[1] + 1), 
         (end_c - start_c + borderfix[2]-(!!isMerge?1:0) - 1), 
-        (end_r - start_r + borderfix[3] + 1)
+        (end_r - start_r + borderfix[3] -1)
     ];
 
     //单元格渲染前，考虑到合并单元格会再次渲染一遍，统一放到这里
