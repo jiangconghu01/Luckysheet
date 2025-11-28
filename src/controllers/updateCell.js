@@ -66,9 +66,9 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
         return;
     }
 
-    let left = col_pre + container_offset.left + Store.rowHeaderWidth - scrollLeft - 2;
+    let left = col_pre + container_offset.left + Store.rowHeaderWidth  + Store.rowGroupWidth - scrollLeft - 2;
     if(luckysheetFreezen.freezenverticaldata != null && col_index1 <= luckysheetFreezen.freezenverticaldata[1]){
-        left = col_pre + container_offset.left + Store.rowHeaderWidth - 2;
+        left = col_pre + container_offset.left + Store.rowHeaderWidth + Store.rowGroupWidth - 2;
     }
 
     let top = row_pre + container_offset.top + Store.infobarHeight + Store.toolbarHeight + Store.calculatebarHeight + Store.columnHeaderHeight - scrollTop - 2;
@@ -129,7 +129,7 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
                 // "transform-origin":"center top",
                 "max-width": winW*2/3, 
                 "max-height": winH + scrollTop - row_pre - 20 - 15 - Store.toolbarHeight - Store.infobarHeight - Store.calculatebarHeight - Store.sheetBarHeight - Store.statisticBarHeight, 
-                "left": col_pre + container_offset.left + Store.rowHeaderWidth - scrollLeft - 2, 
+                "left": col_pre + container_offset.left + Store.rowHeaderWidth + Store.rowGroupWidth - scrollLeft - 2, 
                 "top":  row_pre + container_offset.top + Store.infobarHeight + Store.toolbarHeight + Store.calculatebarHeight + Store.columnHeaderHeight - scrollTop - 2, 
             }
 
@@ -147,7 +147,7 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
                 // "transform-origin":"right top",
                 "max-width": col + container_offset.left - scrollLeft  - 8, 
                 "max-height": winH + scrollTop - row_pre - 20 - 15 - Store.toolbarHeight - Store.infobarHeight - Store.calculatebarHeight - Store.sheetBarHeight - Store.statisticBarHeight, 
-                "right": winW - (container_offset.left + (Store.rowHeaderWidth-1) - scrollLeft) - col, 
+                "right": winW - (container_offset.left + (Store.rowHeaderWidth-1) + Store.rowGroupWidth - scrollLeft) - col, 
                 "top":  row_pre + container_offset.top + Store.infobarHeight + Store.toolbarHeight + Store.calculatebarHeight + Store.columnHeaderHeight - scrollTop - 2, 
             }
 
@@ -285,7 +285,7 @@ export function setCenterInputPosition(row_index, col_index, d){
     let input_postition = { 
         "min-width": col - col_pre + 1 - 8, 
         "max-width": winW*2/3, 
-        "left": col_pre + container_offset.left + Store.rowHeaderWidth - scrollLeft - 2, 
+        "left": col_pre + container_offset.left + Store.rowHeaderWidth + Store.rowGroupWidth - scrollLeft - 2, 
     }
 
     let width = $("#luckysheet-input-box").width();

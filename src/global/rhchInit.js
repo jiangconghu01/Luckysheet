@@ -97,6 +97,7 @@ export default function rhchInit(rowheight, colwidth) {
 
 export function zoomSetting(){
     //zoom
+    // Store.rowGroupWidth = Store.rowGroupWidth * Store.zoomRatio;
     Store.rowHeaderWidth = luckysheetConfigsetting.rowHeaderWidth * Store.zoomRatio;
     Store.columnHeaderHeight = luckysheetConfigsetting.columnHeaderHeight *Store.zoomRatio;
     $("#luckysheet-rows-h").width((Store.rowHeaderWidth-1.5));

@@ -95,7 +95,7 @@ export default function luckysheetcreatedom(colwidth, rowheight, data, menu, tit
     let colsheader = replaceHtml(columnHeaderHTML, { "width": Store.ch_width, "index": 0, "column": "" });
 
     flowHTML = replaceHtml(flowHTML, { "width": Store.ch_width, "flow": flowstr, "index": 0 });
-
+    gh = replaceHtml(gh, { "rowGroups": `<div class="luckysheet-row-groups" id="luckysheet-row-groups" style="height:${Store.rh_height }px;"></div>` });//设置表格宽度
     gh = replaceHtml(gh, { "flow": flowHTML, "rowHeader": "<div style='height:" + Store.rh_height + "px' id='luckysheetrowHeader_0' class='luckysheetsheetchange'></div>", "columnHeader": colsheader, "functionButton": luckysheetConfigsetting.functionButton });//设置需要显示的菜单
 
     $("#" + Store.container).append(gh);

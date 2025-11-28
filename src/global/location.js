@@ -71,8 +71,7 @@ function colLocation(x) {
 
 function mouseposition(x, y) {
     let container_offset = $("#" + Store.container).offset();
-
-    let newX = x - container_offset.left - Store.rowHeaderWidth,
+    let newX = x - container_offset.left - Store.rowHeaderWidth - Store.rowGroupWidth,
         newY = y - container_offset.top - Store.infobarHeight - Store.toolbarHeight - Store.calculatebarHeight - Store.columnHeaderHeight;
 
     return [newX, newY];

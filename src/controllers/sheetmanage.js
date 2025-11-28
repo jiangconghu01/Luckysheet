@@ -1639,6 +1639,7 @@ const sheetmanage = {
         $("#luckysheet-sheettable_0").css({ width: Store.ch_width - 1, height: Store.rh_height });
         $("#luckysheetrowHeader_0").css("height", Store.rh_height);
         $("#luckysheet-cols-h-cells_0").css("width", Store.ch_width); //width更新
+        $("#luckysheet-row-groups").css("height", Store.rh_height);
 
         $("#luckysheet-scrollbar-x div").width(Store.ch_width);
         $("#luckysheet-scrollbar-y div").height(

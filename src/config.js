@@ -67,4 +67,5 @@ export default {
     cellRightClickConfig:{}, //自定义单元格右键菜单
     sheetRightClickConfig:{}, //自定义底部sheet页右击菜单
     imageUpdateMethodConfig:{}, //自定义图片同步方式
+    rowGroups:[], //默认分组的行，用于树形结构数据，或者分组数据折叠（默认隐藏）
 }

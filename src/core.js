@@ -24,6 +24,7 @@ import { getcellvalue, getdatabyselection } from "./global/getdata";
 import { setcellvalue } from "./global/setdata";
 import { selectHightlightShow } from "./controllers/select";
 import { zoomInitial } from "./controllers/zoom";
+import { groupsInitial } from "./controllers/groups";
 // import { printInitial } from "./controllers/print";
 import method from "./global/method";
 
@@ -73,6 +74,7 @@ luckysheet.create = function (setting) {
     Store.limitSheetNameLength = extendsetting.limitSheetNameLength;
     Store.defaultSheetNameMaxLength = extendsetting.defaultSheetNameMaxLength;
     Store.fontList = extendsetting.fontList;
+    Store.rowGroups = extendsetting.rowGroups;
     server.gridKey = extendsetting.gridKey;
     server.loadUrl = extendsetting.loadUrl;
     server.updateUrl = extendsetting.updateUrl;
@@ -196,6 +198,7 @@ function initialWorkBook() {
     orderByInitial(); //menu bar orderby function initialization
     zoomInitial(); //zoom method initialization
     // printInitial(); //print initialization
+    groupsInitial();
     initListener();
 }
 

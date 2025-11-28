@@ -1461,7 +1461,7 @@ let cellRender = function(
         start_c + offsetLeft + borderfix[0] + 1,
         start_r + offsetTop + borderfix[1] + 1,
         end_c - start_c + borderfix[2] - (!!isMerge ? 1 : 0) - 1,
-        end_r - start_r + borderfix[3] + 1,
+        end_r - start_r + borderfix[3] -1,
     ];
 
     //单元格渲染前，考虑到合并单元格会再次渲染一遍，统一放到这里

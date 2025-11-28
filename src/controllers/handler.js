@@ -148,7 +148,7 @@ export default function luckysheetHandler() {
             scrollTop = $("#luckysheet-scrollbar-y").scrollTop();
         let visibledatacolumn_c = Store.visibledatacolumn,
             visibledatarow_c = Store.visibledatarow;
-
+        $("#luckysheet-row-groups").css("top", -scrollTop + "px");
         if (luckysheetFreezen.freezenhorizontaldata != null) {
             visibledatarow_c = luckysheetFreezen.freezenhorizontaldata[3];
         }
@@ -257,7 +257,9 @@ export default function luckysheetHandler() {
         });
 
     $("#luckysheet-scrollbar-y")
-        .scroll(function() {
+        .scroll(function (event) {
+            const scrollTop = event.target.scrollTop;
+            $("#luckysheet-row-groups").css("top", -scrollTop + "px");
             // setTimeout(function(){
             luckysheetscrollevent();
             // },10);

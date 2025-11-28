@@ -1011,7 +1011,7 @@
     left: 0;
     right: 0px;
     overflow: hidden;
-    background: #00ffff;
+    background: #f3f3f2;
 }
 
 .luckysheet-sheet-area {
@@ -1340,7 +1340,7 @@ div.luckysheet-sheets-m:hover {
     cursor: default;
     /*height: 472px;*/
     width: 38px;
-    background: #f3f3f2;
+    /* background: #f3f3f2; */
 }
 
 .luckysheet-cols-menu-btn {
@@ -1626,7 +1626,8 @@ body:not(.ewa-ipad) .luckysheet-rows-h-cell-sel:hover {
     background-color: white;
     width: 15px;
     height: 15px;
-    background-color: #f3f3f2;
+    /* background-color: #f3f3f2; */
+    background-color: #fff;
     /*#E7E7E7;*/
     border-collapse: collapse;
     position: relative;
@@ -7253,4 +7254,12 @@ fieldset[disabled] .btn-danger.focus {
 #luckysheet-icon-redo.disabled {
     cursor: default;
     opacity: 0.4;
+}
+#luckysheet-row-groups{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0px;
+    height: 0px;
+    background-color: #fff;
 }

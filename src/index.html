@@ -79,6 +79,24 @@
 					loadSheetUrl: location.origin + "/luckysheet/api/loadsheet"
 				}
 			} else {
+                const rowGroups = [
+                    {
+                        sheetOrder:0,startIndex: 4, endIndex: 20, collapsed: true,
+                        children:[
+                            {sheetOrder:0,startIndex: 4, endIndex: 8, collapsed: true,
+                                children:[
+                                    {sheetOrder:0,startIndex: 4, endIndex: 6, collapsed: true},
+                                    {sheetOrder:0,startIndex: 7, endIndex: 8, collapsed: true}
+                                ]
+                            },
+                            {sheetOrder:0,startIndex: 12, endIndex: 18, collapsed: true}
+                        ]
+                    },
+                    {
+                        sheetOrder:0,startIndex: 23, endIndex: 40, collapsed: false,
+                        children:[],
+                    }
+                ]
 				// http://localhost:3000/
 				options = {
 					container: 'luckysheet',
@@ -95,6 +113,7 @@
 							license: ''
 						}
 					}],
+                    rowGroups:rowGroups,
 					fontList: [
 						{
 							"fontName": "HanaleiFill",

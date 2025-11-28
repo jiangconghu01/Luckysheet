@@ -166,6 +166,8 @@ const Store = {
         v: ''
     },
     conditionFormatCells: {}, // 条件格式高亮的单元格
+    rowGroups: [], // 条件格式高亮的单元格
+    rowGroupWidth: 0,
 
 }
 
