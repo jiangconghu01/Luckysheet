@@ -7257,9 +7257,33 @@ fieldset[disabled] .btn-danger.focus {
 }
 #luckysheet-row-groups{
     position: absolute;
-    left: 0;
+    left: 2px;
     top: 0;
     width: 0px;
     height: 0px;
     background-color: #fff;
+}
+#luckysheet-row-groups svg{
+    width: 100%;
+    height: 100%;
+}
+#luckysheet-row-groups .path-class{
+    stroke: #000;
+    stroke-width: 1;
+}
+#luckysheet-row-groups .icon-class{
+    stroke: #000;
+    stroke-width: 0.8;
+}
+#luckysheet-row-groups rect{
+    stroke: #000;
+    stroke-width: 1;
+    /* 不能设置成none，不然鼠标点选不到 */
+    fill: transparent;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#row-groups-lines{
+background-color: #018ffb;
 }

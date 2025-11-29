@@ -79,21 +79,27 @@
 					loadSheetUrl: location.origin + "/luckysheet/api/loadsheet"
 				}
 			} else {
+                //sheetOrder--sheet index从0开始，startIndex--起始行，endIndex--结束行，collapsed--是否折叠
+                //startIndex和endIndex均从0开始计数，且含头不含尾，collapsed只在页面初始化时候生效，后续操作不受影响
                 const rowGroups = [
                     {
-                        sheetOrder:0,startIndex: 4, endIndex: 20, collapsed: true,
+                        sheetOrder:0,startIndex: 3, endIndex: 20, collapsed: false,
                         children:[
-                            {sheetOrder:0,startIndex: 4, endIndex: 8, collapsed: true,
+                            {sheetOrder:0,startIndex: 4, endIndex: 8, collapsed: false,
                                 children:[
-                                    {sheetOrder:0,startIndex: 4, endIndex: 6, collapsed: true},
+                                    {sheetOrder:0,startIndex: 4, endIndex: 6, collapsed: false},
                                     {sheetOrder:0,startIndex: 7, endIndex: 8, collapsed: true}
                                 ]
                             },
-                            {sheetOrder:0,startIndex: 12, endIndex: 18, collapsed: true}
+                            {sheetOrder:0,startIndex: 12, endIndex: 18, collapsed: false}
                         ]
                     },
                     {
                         sheetOrder:0,startIndex: 23, endIndex: 40, collapsed: false,
+                        children:[],
+                    },
+                    {
+                        sheetOrder:1,startIndex: 23, endIndex: 40, collapsed: false,
                         children:[],
                     }
                 ]

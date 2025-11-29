@@ -28,6 +28,7 @@ import locale from "../locale/locale";
 import { renderChartShow } from "../expendPlugins/chart/plugin";
 import { changeSheetContainerSize, menuToolBarWidth } from "./resize";
 import { zoomNumberDomBind } from "./zoom";
+import { updateGroupsDataAndDrawineLines } from "./groups";  
 import menuButton from "./menuButton";
 import method from "../global/method";
 import { initialEvent } from "./protection";
@@ -1640,7 +1641,7 @@ const sheetmanage = {
         $("#luckysheetrowHeader_0").css("height", Store.rh_height);
         $("#luckysheet-cols-h-cells_0").css("width", Store.ch_width); //width更新
         $("#luckysheet-row-groups").css("height", Store.rh_height);
-
+        console.log('visibledatarow1',Store.visibledatarow,Store.config["rowhidden"],Store.columnHeaderHeight);
         $("#luckysheet-scrollbar-x div").width(Store.ch_width);
         $("#luckysheet-scrollbar-y div").height(
             Store.rh_height + Store.columnHeaderHeight - Store.cellMainSrollBarSize - 3,
@@ -1667,7 +1668,7 @@ const sheetmanage = {
         setTimeout(() => {
             Store.scrollRefreshSwitch = true;
         }, 0);
-
+        updateGroupsDataAndDrawineLines('resize')
         zoomNumberDomBind(Store.zoomRatio);
     },
     setCurSheet: function(index) {
