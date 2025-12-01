@@ -1319,7 +1319,7 @@ const sheetmanage = {
 
             _this.mergeCalculation(index);
             _this.setSheetParam(true);
-            _this.showSheet();
+            _this.showSheet(true);
 
             setTimeout(function() {
                 formula.execFunctionGroupForce(true);
@@ -1363,7 +1363,7 @@ const sheetmanage = {
 
                 _this.mergeCalculation(index);
                 _this.setSheetParam();
-                _this.showSheet();
+                _this.showSheet(true);
 
                 setTimeout(function() {
                     _this.restoreCache();
@@ -1405,7 +1405,7 @@ const sheetmanage = {
                     file["load"] = "1";
                     _this.mergeCalculation(index);
                     _this.setSheetParam();
-                    _this.showSheet();
+                    _this.showSheet(true);
 
                     setTimeout(function() {
                         _this.restoreCache();
@@ -1634,7 +1634,8 @@ const sheetmanage = {
 
         return ret;
     },
-    showSheet: function() {
+    showSheet: function (isUpdateGroupBox = false) {
+        // isUpdateGroupBox 标记是否需要更新分组框宽度，默认为false
         // changeSheetContainerSize();
         $("#luckysheet-cell-flow_0").css({ width: Store.ch_width, top: "-1px" }); //width更新
         $("#luckysheet-sheettable_0").css({ width: Store.ch_width - 1, height: Store.rh_height });
@@ -1668,7 +1669,7 @@ const sheetmanage = {
         setTimeout(() => {
             Store.scrollRefreshSwitch = true;
         }, 0);
-        updateGroupsDataAndDrawineLines('resize')
+        updateGroupsDataAndDrawineLines(isUpdateGroupBox?'update':'resize')
         zoomNumberDomBind(Store.zoomRatio);
     },
     setCurSheet: function(index) {

@@ -105,14 +105,8 @@ function executeGroupAction(rowGroupData) {
     }
   }
 }
-//初始化分组线条区域
-export function groupsInitial() {
-  const rowGroupData = Store.rowGroups;
-  if (!rowGroupData || rowGroupData.length === 0) {
-    return;
-  }
-  console.log("rowGroupData", rowGroupData);
-  const svgbox = document.getElementById("row-groups-lines");
+//设置分组区域宽度
+function setRowGroupsWidth(rowGroupData) {
   let maxDepth = 0;
   function traverseGroups(groups, currentDepth = 1) {
     // 更新最大深度
@@ -124,17 +118,31 @@ export function groupsInitial() {
         traverseGroups(group.children, currentDepth + 1);
       }
     }
+    }
+    //获取当前sheet页的分组数据
+  const currentSheetGroupData = rowGroupData.filter(
+    group => Store.currentSheetIndex == group.sheetOrder
+  );
+  if (currentSheetGroupData.length > 0) {
+    traverseGroups(currentSheetGroupData);
   }
-  traverseGroups(rowGroupData);
   Store.rowGroupWidth = maxDepth * GROUP_LEVEL_WIDTH;
   $("#luckysheet-grid-window-1").css(
     "left",
     `${maxDepth * GROUP_LEVEL_WIDTH + 4}px`
   );
   $("#luckysheet-row-groups").css("width", `${maxDepth * GROUP_LEVEL_WIDTH}px`);
-  //   $("#luckysheet-row-groups").html("<div>2342342</div>");
-
-  console.log("maxDepth before", maxDepth);
+  return maxDepth;
+}
+//初始化分组线条区域
+export function groupsInitial() {
+  const rowGroupData = Store.rowGroups;
+  if (!rowGroupData || rowGroupData.length === 0) {
+    return;
+  }
+  //   console.log("rowGroupData", rowGroupData);
+  const maxDepth = setRowGroupsWidth(rowGroupData);
+  const svgbox = document.getElementById("row-groups-lines");
 
   setTimeout(() => {
     executeGroupAction(rowGroupData);
@@ -160,7 +168,7 @@ export function groupsInitial() {
         });
         // $(this).attr("foldstatus", "opened");
       }
-      console.log("click rect", infor);
+      //   console.log("click rect", infor);
     });
 }
 //对外接口，更新数据并重绘线条
@@ -168,28 +176,7 @@ export function updateGroupsDataAndDrawineLines(type) {
   const rowGroupData = Store.rowGroups;
   //更新数据重新计算层级，绘制svg区域宽度
   if (type == "update") {
-    let maxDepth = 0;
-    function traverseGroups(groups, currentDepth = 1) {
-      // 更新最大深度
-      if (currentDepth > maxDepth) {
-        maxDepth = currentDepth;
-      }
-      for (const group of groups) {
-        if (group.children && group.children.length > 0) {
-          traverseGroups(group.children, currentDepth + 1);
-        }
-      }
-    }
-    traverseGroups(rowGroupData);
-    Store.rowGroupWidth = maxDepth * GROUP_LEVEL_WIDTH;
-    $("#luckysheet-grid-window-1").css(
-      "left",
-      `${maxDepth * GROUP_LEVEL_WIDTH + 4}px`
-    );
-    $("#luckysheet-row-groups").css(
-      "width",
-      `${maxDepth * GROUP_LEVEL_WIDTH}px`
-    );
+    let maxDepth = setRowGroupsWidth(rowGroupData);
     const svgbox = document.getElementById("row-groups-lines");
     $(svgbox).empty();
     executeGroupAction(rowGroupData);
