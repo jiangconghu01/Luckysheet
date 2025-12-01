@@ -7283,7 +7283,9 @@ fieldset[disabled] .btn-danger.focus {
     cursor: pointer;
     z-index: 2;
 }
-
+#luckysheet-row-groups rect[foldstatus=folded]{
+       z-index: 10;
+}
 #row-groups-lines{
 background-color: #018ffb;
 }

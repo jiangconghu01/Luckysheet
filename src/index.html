@@ -81,9 +81,10 @@
 			} else {
                 //sheetOrder--sheet index从0开始，startIndex--起始行，endIndex--结束行，collapsed--是否折叠
                 //startIndex和endIndex均从0开始计数，且含头不含尾，collapsed只在页面初始化时候生效，后续操作不受影响
+                //获取和设置行分组数据的接口：luckysheet.getGroupsData和luckysheet.setGroupsData
                 const rowGroups = [
                     {
-                        sheetOrder:0,startIndex: 3, endIndex: 20, collapsed: false,
+                        sheetOrder:0,startIndex: 0, endIndex: 20, collapsed: false,
                         children:[
                             {sheetOrder:0,startIndex: 4, endIndex: 8, collapsed: false,
                                 children:[

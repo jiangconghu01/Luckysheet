@@ -24,7 +24,7 @@ import { getcellvalue, getdatabyselection } from "./global/getdata";
 import { setcellvalue } from "./global/setdata";
 import { selectHightlightShow } from "./controllers/select";
 import { zoomInitial } from "./controllers/zoom";
-import { groupsInitial } from "./controllers/groups";
+import { groupsInitial,getCurrentGroupsData,setCurrentGroupsData } from "./controllers/groups";
 // import { printInitial } from "./controllers/print";
 import method from "./global/method";
 
@@ -256,5 +256,10 @@ luckysheet.locales = locales;
 
 // 获取条件格式渲染的单元格数量
 luckysheet.getConditionFormatCells = getConditionFormatCells;
+
+//获取当前表格分组数据
+luckysheet.getGroupsData = getCurrentGroupsData;
+//设置当前表格分组数据
+luckysheet.setGroupsData = setCurrentGroupsData;
 
 export { luckysheet };

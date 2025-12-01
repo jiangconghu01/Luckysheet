@@ -1641,7 +1641,7 @@ const sheetmanage = {
         $("#luckysheetrowHeader_0").css("height", Store.rh_height);
         $("#luckysheet-cols-h-cells_0").css("width", Store.ch_width); //width更新
         $("#luckysheet-row-groups").css("height", Store.rh_height);
-        console.log('visibledatarow1',Store.visibledatarow,Store.config["rowhidden"],Store.columnHeaderHeight);
+        // console.log('visibledatarow1',Store.visibledatarow,Store.config["rowhidden"],Store.columnHeaderHeight);
         $("#luckysheet-scrollbar-x div").width(Store.ch_width);
         $("#luckysheet-scrollbar-y div").height(
             Store.rh_height + Store.columnHeaderHeight - Store.cellMainSrollBarSize - 3,
